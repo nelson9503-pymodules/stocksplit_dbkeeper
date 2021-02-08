@@ -40,9 +40,10 @@ class DBKeeper:
         self.tb.update(updates)
         # update lastupdate
         self.config[symbol]["last_update"] = today
-        if self.config[symbol]["first_date"] == 0:
+        if self.config[symbol]["first_date"] == 0 and len(data) > 0:
             self.config[symbol]["first_date"] = min(list(data.keys()))
-        self.config[symbol]["last_date"] = max(list(data.keys()))
+        if len(data) > 0:
+            self.config[symbol]["last_date"] = max(list(data.keys()))
         if self.config[symbol]["data_points"] == 0:
             self.config[symbol]["data_points"] = len(data)
         else:
